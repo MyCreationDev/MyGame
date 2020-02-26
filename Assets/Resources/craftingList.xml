@@ -1,0 +1,12 @@
+<resource>
+	<woodPlanks>
+		<processTime>2</processTime>
+		<itemsneeded>
+			<wood>2</wood>
+			<stone>1</stone>
+		</itemsneeded>
+	</woodPlanks>
+	<Coffe>
+		<bones>2</bones>
+	</Coffe>
+</resource>
