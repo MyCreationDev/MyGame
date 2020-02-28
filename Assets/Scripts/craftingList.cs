@@ -14,8 +14,6 @@ public class craftingList : MonoBehaviour
 
     private void Start()
     {
-        
-        
     }
 
     private void Update()

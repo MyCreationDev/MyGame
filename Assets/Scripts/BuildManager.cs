@@ -5,7 +5,6 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour
 {
     public GameObject Enviroment;
-    public GameObject BuildMenu;
     private GameObject CurrentlySelectedPrefab;
     private bool isBuilding = false;
 

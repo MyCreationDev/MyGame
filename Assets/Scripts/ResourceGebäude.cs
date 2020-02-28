@@ -2,25 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicGebäude : MonoBehaviour
+public class ResourceGebäude : BasicGebäude
 {
-    public int Holzkosten = 500;
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        MachwasGebäudeMachen();
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-
-    public void MachwasGebäudeMachen()
-    {
-
     }
 }
