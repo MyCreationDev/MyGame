@@ -21,7 +21,7 @@ public class craftingList : MonoBehaviour
         string data = xmlRawFile.text;
         foreach(string c in parseXmlFile(data, "resources", "woodPlanks", "requirement"))
         {
-            Debug.Log(c);
+            //Debug.Log(c);
         }
     }
 
