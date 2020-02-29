@@ -27,6 +27,7 @@ public class OnSelect : MonoBehaviour
         }
         else if(Input.GetMouseButtonDown(0))
         {
+            //Prüfen, was angelickt wurde
             selectUnit(false);
         }
 
@@ -43,21 +44,20 @@ public class OnSelect : MonoBehaviour
             layoutSelectionBox.position = (topRightMousePosition + bottomLeftMousePosition) / 2f;
             float width = Mathf.Abs(topRightMousePosition.x - bottomLeftMousePosition.x);
             float height = Mathf.Abs(topRightMousePosition.y - bottomLeftMousePosition.y);
+
+            
             layoutSelectionBox.sizeDelta = new Vector2(width, height);
 
-            //topRightMousePosition = Camera.main.ScreenToViewportPoint(topRightMousePosition);
-            //bottomLeftMousePosition = Camera.main.ScreenToViewportPoint(bottomLeftMousePosition);
 
             Rect selectBox = new Rect(topRightMousePosition.x, topRightMousePosition.y, bottomLeftMousePosition.x - topRightMousePosition.x, bottomLeftMousePosition.y - topRightMousePosition.y);
-            //Debug.Log(selectBox);
+
 
             //Prüfe alle GameObjects in der Public Variabe "selectableUnits". Befinden diese sich innerhalb des Quadrats und sind nicht bereits in "selectedUnits" enthalten, werden sie "selectedUnits" hinzugefügt
             foreach(GameObject Unit in selectableUnits)
             {
-                //INnerhalb des Quadrats?
+                //Innerhalb des Quadrats?
                 if (selectBox.Contains(Camera.main.WorldToScreenPoint(Unit.transform.position),true))
                 {
-                    Debug.Log(Unit.name);
                     alreadySelected = false;
                     //prüfen, ob die Unit schon zu den ausgewählten ("selectedUnits") gehört.
                     foreach(GameObject a in selectedUnits)
