@@ -32,7 +32,6 @@ public class OnSelect : MonoBehaviour
 
         //SelectionBox - Mehrfachauswahl von Einheiten/Gebäuden
         //GEBÄUDE NOCH NICHT IMPLEMENTIERT. ABSTRAKTION FEHLT
-        //Auswahl derzeit nur von unten links nach oben rechts möglich
         else if(Input.GetMouseButton(0))
         {
             if(topRightMousePosition == new Vector2())
@@ -42,18 +41,24 @@ public class OnSelect : MonoBehaviour
             bottomLeftMousePosition = Input.mousePosition;
 
             layoutSelectionBox.position = (topRightMousePosition + bottomLeftMousePosition) / 2f;
-            layoutSelectionBox.sizeDelta = new Vector2(Mathf.Abs(topRightMousePosition.x- bottomLeftMousePosition.x), Mathf.Abs(topRightMousePosition.y - bottomLeftMousePosition.y));
+            float width = Mathf.Abs(topRightMousePosition.x - bottomLeftMousePosition.x);
+            float height = Mathf.Abs(topRightMousePosition.y - bottomLeftMousePosition.y);
+            layoutSelectionBox.sizeDelta = new Vector2(width, height);
+
+            //topRightMousePosition = Camera.main.ScreenToViewportPoint(topRightMousePosition);
+            //bottomLeftMousePosition = Camera.main.ScreenToViewportPoint(bottomLeftMousePosition);
+
             Rect selectBox = new Rect(topRightMousePosition.x, topRightMousePosition.y, bottomLeftMousePosition.x - topRightMousePosition.x, bottomLeftMousePosition.y - topRightMousePosition.y);
-            
+            //Debug.Log(selectBox);
 
             //Prüfe alle GameObjects in der Public Variabe "selectableUnits". Befinden diese sich innerhalb des Quadrats und sind nicht bereits in "selectedUnits" enthalten, werden sie "selectedUnits" hinzugefügt
             foreach(GameObject Unit in selectableUnits)
             {
                 //INnerhalb des Quadrats?
-                if (selectBox.Contains(Camera.main.WorldToScreenPoint(Unit.transform.position)))
+                if (selectBox.Contains(Camera.main.WorldToScreenPoint(Unit.transform.position),true))
                 {
-                    alreadySelected = false;
                     Debug.Log(Unit.name);
+                    alreadySelected = false;
                     //prüfen, ob die Unit schon zu den ausgewählten ("selectedUnits") gehört.
                     foreach(GameObject a in selectedUnits)
                     {
