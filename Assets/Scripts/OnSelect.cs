@@ -25,6 +25,7 @@ public class OnSelect : MonoBehaviour
         {
             selectUnit(true);
         }
+        
         else if(Input.GetMouseButtonDown(0))
         {
             //Prüfen, was angelickt wurde
@@ -86,11 +87,8 @@ public class OnSelect : MonoBehaviour
             layoutSelectionBox.sizeDelta = new Vector2(0f, 0f);
         }
         //Bewegen der ausgewhlten Einheiten einleiten
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButton(1))
         {
-
-            
-
             foreach (GameObject unitstoMove in selectedUnits)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -98,31 +96,48 @@ public class OnSelect : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit))
                 {
+                    unitstoMove.GetComponent<Units>().movement = true;
                     unitstoMove.GetComponent<Units>().MoveUnits(hit.point);
                 }
             }
         }
     
-        bool selectUnit(bool withControl)
-        {
-            if(withControl == false)
-            {
-                selectedUnits.Clear();
-            }
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+    }
 
-            
+    bool selectUnit(bool withControl)
+    {
+        if (withControl == false)
+        {
+            selectedUnits.Clear();
+        }
+        RaycastHit hit;
+        Vector3 ClickPosition = Input.mousePosition;
+        Ray ray = Camera.main.ScreenPointToRay(ClickPosition);
+
+
+
+
+            //SphereCollider einschalten beim bewegen und klicken ausschalten. Beim stehen ausschalten.
             if (Physics.Raycast(ray, out hit))
+        {
+
+            Transform objectHit = hit.transform;
+            if(objectHit.gameObject.GetComponent<SphereCollider>())
             {
-                Transform objectHit = hit.transform;
+                Debug.Log("Ausschalten SphereCollider");
+                Collider sphere = objectHit.gameObject.GetComponent<SphereCollider>();
+                sphere.enabled = false;
+                ray = Camera.main.ScreenPointToRay(ClickPosition);
+            }
+            if (objectHit.gameObject.GetComponent<Units>())
+            {
                 if (objectHit.gameObject.GetComponent<Units>().playername == "Mike")
                 {
                     selectedUnits.Add(objectHit.gameObject);
                 }
             }
-
-            return true;
         }
+        return true;
     }
 }

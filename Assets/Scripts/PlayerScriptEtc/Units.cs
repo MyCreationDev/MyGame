@@ -8,24 +8,24 @@ public class Units : PlayerScripts
     public float speed;
     public int life;
     public float rangeToAttack;
-
-
-    private NavMeshAgent agent;
+    protected float dist;
+    public bool movement;
+    [HideInInspector]
+    protected NavMeshAgent agent;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        life = 100;
-        agent = GetComponent<NavMeshAgent>();
+        
     }
 
 
-    public bool MoveUnits(Vector3 destination)
+    public void MoveUnits(Vector3 destination)
     {
+        
         agent.speed = speed;
         agent.SetDestination(destination);
-        return true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,6 +37,7 @@ public class Units : PlayerScripts
         }
     }
 
+    //Wird in der Childklasse näher beschrieben /überschrieben
     public virtual void attack(GameObject Enemy)
     {
 
