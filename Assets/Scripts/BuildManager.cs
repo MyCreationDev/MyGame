@@ -6,17 +6,11 @@ public class BuildManager : MonoBehaviour
 {
     public GameObject Enviroment;
     private GameObject CurrentlySelectedPrefab;
-    private bool isBuilding = false;
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            isBuilding = false;
-        }
-        if(isBuilding == true)
+        if(OnSelect.Instance.IsBuildingMode)
         {
             var Ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitinfo;
@@ -27,7 +21,12 @@ public class BuildManager : MonoBehaviour
 
     public void Build(GameObject PrefabToBuild)
     {
-        CurrentlySelectedPrefab = Instantiate(PrefabToBuild, Enviroment.transform);
-        isBuilding = true;
+        BasicGebäude buildingToBuild = PrefabToBuild.GetComponent<BasicGebäude>();
+        if (buildingToBuild.CanBuyBuilding())
+        {
+            buildingToBuild.BuyBuilding();
+            CurrentlySelectedPrefab = Instantiate(PrefabToBuild, Enviroment.transform);
+            OnSelect.Instance.IsBuildingMode = true;
+        }
     }
 }

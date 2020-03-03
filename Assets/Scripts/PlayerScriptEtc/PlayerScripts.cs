@@ -5,4 +5,5 @@ using UnityEngine;
 public class PlayerScripts : MonoBehaviour
 {
     public string playername = "Mike";
+    
 }

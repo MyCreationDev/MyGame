@@ -6,6 +6,22 @@ using UnityEngine.UI;
 
 public class OnSelect : MonoBehaviour
 {
+    //Singleton ansatz um zu garantieren dass nur ein OnSelect exisitert.
+    private static OnSelect _instance;
+    public static OnSelect Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     public List<GameObject> selectedUnits;
     public RectTransform layoutSelectionBox;
     public List<GameObject> selectableUnits;
@@ -13,13 +29,19 @@ public class OnSelect : MonoBehaviour
     Vector2 topRightMousePosition;
     Vector2 bottomLeftMousePosition;
 
+    public bool IsBuildingMode = false;
+
 
  
 
     // Update is called once per frame
     void Update()
     {
-
+        if (IsBuildingMode)
+        {
+            IsBuildingMode = !IsBuildingMode;
+            return;
+        }
 
         if(Input.GetMouseButtonDown(0) && Input.GetKey(KeyCode.LeftControl))
         {
