@@ -14,13 +14,13 @@ public class BowMan : Units
     public GameObject Bow;
     private float lastshot;
 
-
     private GameObject focusedEnemy;
 
     private void Start()
     {
         movement = false;   
         agent = gameObject.GetComponent<NavMeshAgent>();
+        GetComponent<SphereCollider>().radius = noticeEnemyRange;
     }
 
     public override void attack(GameObject Enemy)
@@ -35,32 +35,22 @@ public class BowMan : Units
     void Update()
     {
         dist = agent.remainingDistance;
-        gameObject.GetComponent<SphereCollider>().enabled = false;
         if(focusedEnemy)
         {
             gameObject.transform.LookAt(focusedEnemy.gameObject.transform.position);
-            
-            if (Time.time - lastshot >= attackspeed)
+            if(Vector3.Distance(gameObject.transform.position, focusedEnemy.transform.position) <= rangeToAttack)
             {
-                Bow.transform.LookAt(focusedEnemy.gameObject.transform.position);
-
-                Arrow projectile = Instantiate(arrow, arrowPosition.position, arrowPosition.rotation).GetComponent<Arrow>();
-
-                //Pfeil schießt direkt auf das Ziel. Ggf. erst, wenn der Bogenschütze ein höheres Level hat??
-                projectile.target = focusedEnemy.gameObject;
-                projectile.speed = arrowspeed;
-                lastshot = Time.time;
-            }
-                
-        }
-        
-        if (!agent.pathPending)
-        {
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                agent.SetDestination(agent.transform.position);
+                if (Time.time - lastshot >= attackspeed)
                 {
-                    GetComponent<SphereCollider>().enabled = true;
+                    Bow.transform.LookAt(focusedEnemy.gameObject.transform.position);
+
+                    Arrow projectile = Instantiate(arrow, arrowPosition.position, arrowPosition.rotation).GetComponent<Arrow>();
+
+                    //Pfeil schießt direkt auf das Ziel. Ggf. erst, wenn der Bogenschütze ein höheres Level hat??
+                    projectile.target = focusedEnemy.gameObject;
+                    projectile.speed = arrowspeed;
+                    lastshot = Time.time;
                 }
             }
         }

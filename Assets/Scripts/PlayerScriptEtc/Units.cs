@@ -8,17 +8,12 @@ public class Units : PlayerScripts
     public float speed;
     public int life;
     public float rangeToAttack;
+    public float noticeEnemyRange;
     protected float dist;
     public bool movement;
     [HideInInspector]
     protected NavMeshAgent agent;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 
     public void MoveUnits(Vector3 destination)
@@ -28,12 +23,16 @@ public class Units : PlayerScripts
         agent.SetDestination(destination);
     }
 
+
+    
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "D_mo_manicanSword")
-        { 
-            //gameObject.transform.LookAt(other.gameObject.transform.position);
-            attack(other.gameObject);
+        if (other.gameObject.GetComponent<Units>())
+        {
+            if (other.gameObject.GetComponent<Units>().playername != "Mike")
+            {
+                    attack(other.gameObject);
+            }
         }
     }
 
@@ -42,4 +41,15 @@ public class Units : PlayerScripts
     {
 
     }
+
+    public void SphereColliderOff()
+    {
+        GetComponent<SphereCollider>().enabled = false;
+    }
+
+    public void SphereColliderOn()
+    {
+        GetComponent<SphereCollider>().enabled = true;
+    }
+
 }
