@@ -25,6 +25,7 @@ public class OnSelect : MonoBehaviour
         {
             selectUnit(true);
         }
+        
         else if(Input.GetMouseButtonDown(0))
         {
             //Prüfen, was angelickt wurde
@@ -86,43 +87,90 @@ public class OnSelect : MonoBehaviour
             layoutSelectionBox.sizeDelta = new Vector2(0f, 0f);
         }
         //Bewegen der ausgewhlten Einheiten einleiten
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButton(1) || Input.GetMouseButtonDown(1))
         {
-
-            
-
             foreach (GameObject unitstoMove in selectedUnits)
             {
+                unitstoMove.GetComponent<SphereCollider>().enabled = false;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
+                
                 if (Physics.Raycast(ray, out hit))
                 {
+                    GameObject clickedObject = hit.transform.gameObject;
+                    Component sphereCollider = clickedObject.GetComponent<SphereCollider>();
+                    if (sphereCollider)
+                    {
+                        clickedObject.GetComponent<Units>().SphereColliderOff();
+                    }
+                        if (hit.transform.gameObject.GetComponent<Units>())
+                    {
+                        if(hit.transform.gameObject.GetComponent<Units>().playername != selectedUnits[0].GetComponent<Units>().playername)
+                        {
+                            foreach(GameObject units in selectedUnits)
+                            {
+                                units.GetComponent<Units>().attack(hit.transform.gameObject);
+                            }
+                        }
+                    }
+                    unitstoMove.GetComponent<Units>().movement = true;
                     unitstoMove.GetComponent<Units>().MoveUnits(hit.point);
                 }
+                unitstoMove.GetComponent<Units>().SphereColliderOn();
             }
         }
     
-        bool selectUnit(bool withControl)
+        
+    }
+
+    void selectUnit(bool withControl)
+    {
+
+        //Bei gedrückter STRG-Taste werden zusätzliche EInheiten ausgewählt.
+        //Abfrage, ob STRG gedrückt wurde. Nein: Ausgewählte Einheiten abwählen.
+        if (withControl == false)
         {
-            if(withControl == false)
+            selectedUnits.Clear();
+        }
+        RaycastHit hit;
+        Vector3 ClickPosition = Input.mousePosition;
+        Ray ray = Camera.main.ScreenPointToRay(ClickPosition);
+
+        //Maustaste trifft ein Objekt.
+        if (Physics.Raycast(ray, out hit))
+        {
+            Transform objectHit = hit.transform;
+            //Bei SphereCollider diesen ausschalten.
+            if(objectHit.gameObject.GetComponent<SphereCollider>())
             {
                 selectedUnits.Clear();
+                Collider sphere = objectHit.gameObject.GetComponent<SphereCollider>();
+                sphere.enabled = false;
+                ray = Camera.main.ScreenPointToRay(ClickPosition);
+                if(Physics.Raycast(ray, out hit))
+                {
+                    if(hit.collider.GetType().Name == "BoxCollider")
+                    {
+                        if (hit.transform.gameObject.GetComponent<Units>())
+                        {
+                            if (hit.transform.gameObject.GetComponent<Units>().playername == "Mike")
+                            {
+                                selectedUnits.Add(hit.transform.gameObject);
+                            }
+                        }
+                            
+                    }
+                }
+                sphere.enabled = true;
             }
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            
-            if (Physics.Raycast(ray, out hit))
+            else if (objectHit.gameObject.GetComponent<Units>())
             {
-                Transform objectHit = hit.transform;
                 if (objectHit.gameObject.GetComponent<Units>().playername == "Mike")
                 {
                     selectedUnits.Add(objectHit.gameObject);
                 }
             }
-
-            return true;
         }
     }
 }
