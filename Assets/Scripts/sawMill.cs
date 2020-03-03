@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class sawMill : MonoBehaviour
 {
     private int amount;
-    public int timeNeedForProcess;
     private float lastprocessed;
 
     // Start is called before the first frame update

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicGebäude : MonoBehaviour
+public class BasicGebäude : PlayerScripts
 {
     public int Holzkosten = 500;
 

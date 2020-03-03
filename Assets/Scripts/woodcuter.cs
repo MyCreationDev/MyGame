@@ -1,23 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
-public class woodcuter : MonoBehaviour
+public class woodcuter : ResourceGebäude
 {
-
-
-    public float timeinSeconds;
-    public int amountWhileThisTime;
-    public string itemneeds;
-    public int itemNeedCount;
 
     private void Start()
     {
-
+        ProductionAmount = 5;
     }
-    // Update is called once per frame
-    void Update()
+    protected override void GenerateResource(object sender, ElapsedEventArgs e)
     {
-        
+        base.GenerateResource(sender, e);
+
     }
 }

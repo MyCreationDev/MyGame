@@ -12,12 +12,15 @@ public class Units : PlayerScripts
 
     private NavMeshAgent agent;
 
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         life = 100;
-        agent = GetComponent<NavMeshAgent>();
     }
 
 

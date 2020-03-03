@@ -2,16 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Text WoodDisplay;
-    public Text StoneDisplay;
-    public Text WoodPlanksDisplay;
+    public TextMeshProUGUI WoodDisplay;
+    public TextMeshProUGUI StoneDisplay;
+    public TextMeshProUGUI WoodPlanksDisplay;
 
-    private int _productionIntervall = 3000;
+    private int _productionIntervall = 1000;
 
     // Start is called before the first frame update
     void Start()
@@ -33,15 +34,17 @@ public class GameManager : MonoBehaviour
     {
         int woodAmout = int.Parse(WoodDisplay.text);
         int stoneAmout = int.Parse(StoneDisplay.text);
-        int woodPlankAmout = int.Parse(WoodPlanksDisplay.text);
 
         woodAmout += GlobalVariables.WoodProduction;
         stoneAmout += GlobalVariables.StoneProduction;
-        woodPlankAmout += GlobalVariables.WoodPlankProduction;
 
         WoodDisplay.text = woodAmout.ToString();
         StoneDisplay.text = stoneAmout.ToString();
-        WoodPlanksDisplay.text = woodPlankAmout.ToString();
+        CalculateCraftings();
     }
 
+    private void CalculateCraftings()
+    {
+        
+    }
 }

@@ -19,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     {
 
         //Target = GameObject.Find("D_mo_manicanBow").transform;
-        agent.SetDestination(Target.position);
+        if(Target)
+            agent.SetDestination(Target.position);
     }
 }
