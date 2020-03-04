@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  target: {fileID: 0}
+  damage: 20
 --- !u!65 &4880763974373137125
 BoxCollider:
   m_ObjectHideFlags: 0

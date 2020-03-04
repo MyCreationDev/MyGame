@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Arrow : MonoBehaviour
 {
     public int speed;
     public GameObject target;
+    public int damage;
 
     // Update is called once per frame
     void Update()
@@ -22,12 +24,7 @@ public class Arrow : MonoBehaviour
         Units EnemyHit = collision.gameObject.GetComponent<Units>();
         if(EnemyHit)
         {
-            collision.gameObject.GetComponent<Units>().life -= 20;
-            if(EnemyHit.life <= 0)
-            {
-                //Killfunktion
-                Destroy(EnemyHit.gameObject);
-            }
+            collision.gameObject.GetComponent<Units>().gettingDamage(damage);            
         }
         Destroy(gameObject);
     }

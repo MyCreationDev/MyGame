@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 public class Units : PlayerScripts
 {
     public string unitname;
@@ -11,6 +12,8 @@ public class Units : PlayerScripts
     public float noticeEnemyRange;
     protected float dist;
     public bool movement;
+
+    public Image HealthBar;
     [HideInInspector]
     protected NavMeshAgent agent;
 
@@ -34,6 +37,17 @@ public class Units : PlayerScripts
         agent.SetDestination(destination);
     }
 
+    public void gettingDamage(int damage)
+    {
+        life = life - damage;
+        HealthBar.fillAmount = life / 100f;
+        if (life <= 0)
+        {
+            //Killfunktion
+            Destroy(gameObject);
+        }
+    }
+       
 
     
     private void OnTriggerEnter(Collider other)
