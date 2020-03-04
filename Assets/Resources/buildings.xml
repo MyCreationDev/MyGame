@@ -1,0 +1,35 @@
+<buildings>
+	<wohngebauede>
+		<huette>
+			<buildingTime>10</buildingTime>
+			<requirement>
+				<woodPlanks>20</woodPlanks>
+			</requirement>
+			<produces>wood</produces>
+		</huette>
+	</wohngebauede>
+	<resourcenbuildings>
+		<holzfaellerei>
+			<buildingTime>10</buildingTime>
+			<requirement>
+				<woodPlanks>20</woodPlanks>
+			</requirement>
+			<produces>wood</produces>
+		</holzfaellerei>
+		<sawMill>
+			<buildingTime>10</buildingTime>
+			<requirement>
+				<woodPlanks>20</woodPlanks>
+			</requirement>
+			<produces>wood</produces>
+		</sawMill>
+		<steinbruch>
+			<buildingTime>10</buildingTime>
+			<requirement>
+				<woodPlanks>20</woodPlanks>
+			</requirement>
+			<produces>wood</produces>
+		</steinbruch>
+	</resourcenbuildings>
+
+</buildings>
