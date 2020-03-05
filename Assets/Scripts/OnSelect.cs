@@ -76,29 +76,33 @@ public class OnSelect : MonoBehaviour
 
 
             //Prüfe alle GameObjects in der Public Variabe "selectableUnits". Befinden diese sich innerhalb des Quadrats und sind nicht bereits in "selectedUnits" enthalten, werden sie "selectedUnits" hinzugefügt
-            foreach(GameObject Unit in selectableUnits)
+            if(selectableUnits.Count >= 1)
             {
-                //Innerhalb des Quadrats?
-                if (selectBox.Contains(Camera.main.WorldToScreenPoint(Unit.transform.position),true))
+                foreach (GameObject Unit in selectableUnits)
                 {
-                    alreadySelected = false;
-                    //prüfen, ob die Unit schon zu den ausgewählten ("selectedUnits") gehört.
-                    foreach(GameObject a in selectedUnits)
+                    //Innerhalb des Quadrats?
+                    if (selectBox.Contains(Camera.main.WorldToScreenPoint(Unit.transform.position), true))
                     {
-                        if(a == Unit)
+                        alreadySelected = false;
+                        //prüfen, ob die Unit schon zu den ausgewählten ("selectedUnits") gehört.
+                        foreach (GameObject a in selectedUnits)
                         {
-                            alreadySelected = true;
-                            break;
+                            if (a == Unit)
+                            {
+                                alreadySelected = true;
+                                break;
+                            }
                         }
+                        if (alreadySelected == false)
+                        {
+                            selectedUnits.Add(Unit);
+                        }
+
                     }
-                    if(alreadySelected == false)
-                    {
-                        selectedUnits.Add(Unit);
-                    }
-                    
                 }
+
+
             }
-            
 
         }
         //Linke Maustaste hoch um die variablen für die Quadrate zurückzusetzen
@@ -148,7 +152,6 @@ public class OnSelect : MonoBehaviour
 
     void selectUnit(bool withControl)
     {
-
         //Bei gedrückter STRG-Taste werden zusätzliche EInheiten ausgewählt.
         //Abfrage, ob STRG gedrückt wurde. Nein: Ausgewählte Einheiten abwählen.
         if (withControl == false)
@@ -192,6 +195,11 @@ public class OnSelect : MonoBehaviour
                 {
                     selectedUnits.Add(objectHit.gameObject);
                 }
+            }
+            else if(objectHit.gameObject.GetComponent<MarketPlace>())
+            {
+                //Marktplatz-Interface anzeigen
+                Debug.Log("Hello");
             }
         }
     }

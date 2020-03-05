@@ -54,7 +54,7 @@ public class Units : PlayerScripts
     {
         if (other.gameObject.GetComponent<Units>())
         {
-            if (other.gameObject.GetComponent<Units>().playername != "Mike")
+            if (other.gameObject.GetComponent<Units>().playername != gameObject.GetComponent<Units>().playername)
             {
                     attack(other.gameObject);
             }

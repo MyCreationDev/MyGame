@@ -12,6 +12,9 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        var UnitsToAttack = GameObject.Find("woodcuter (1)");
+        Target = UnitsToAttack.transform;
     }
 
     // Update is called once per frame

@@ -10,7 +10,6 @@ public class HealthBar : MonoBehaviour
     private void Update()
     {
         LookAt = GlobalVariables.MainCamera;
-        Debug.Log(LookAt);
         gameObject.transform.parent.gameObject.transform.LookAt(LookAt.position);
     }
 }

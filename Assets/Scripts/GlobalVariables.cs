@@ -8,4 +8,10 @@ public static class GlobalVariables
     public static int StoneProduction = 0;
     public static int WoodPlankProduction = 0;
     public static Transform MainCamera = GameObject.Find("Main Camera").transform;
+
+
+
+
+    //MarketPlace-Resource variables
+    public static int NormalWoodAmount;
 }
