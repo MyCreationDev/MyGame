@@ -12,10 +12,9 @@
 			<sto>4</sto>
 		</requirement>
 	</woodPlanks>
-	<stonebricks>
+	<stone>
 		<duration>7</duration>
-		<requirement>
-			<wood>3</wood>
-		</requirement>
-	</stonebricks>
+    <normalAmountPerHundred>20</normalAmountPerHundred>
+    <normalPrice>3</normalPrice>
+	</stone>
 </resources>

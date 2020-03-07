@@ -6,20 +6,7 @@ using UnityEngine.UI;
 
 public class MarketPlace : MonoBehaviour
 {
-    public Slider mainSlider;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        getRessourceInformation("wood", "normalPrice");
-    }
-
-    public void getRessourceInformation(string resource, string information)
+    public string getRessourceInformation(string resource, string information)
     {
         TextAsset textXMLAsset = Resources.Load<TextAsset>("resourceList");
         var doc = XDocument.Parse(textXMLAsset.text);
@@ -32,10 +19,13 @@ public class MarketPlace : MonoBehaviour
                 {
                     //Abgefragten Wert zurückgeben
                     //Debug.Log(singleDict.Value);
+                    return singleDict.Value;
                 }
             }
-
+            
         }
+        return "";
     }
+    
 
 }
