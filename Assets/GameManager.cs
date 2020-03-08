@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
     public int wood = 0;
     public int stone = 0;
     public int woodPlank = 0;
@@ -59,6 +60,6 @@ public class GameManager : MonoBehaviour
 
     public void updateResources()
     {
-
+        
     }
 }

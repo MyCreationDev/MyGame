@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 public class MarketPlace : MonoBehaviour
 {
+    //Marktplatzbestand
+    public int woodAmount;
+    public int stoneAmount;
+
+    private void Update()
+    {
+        
+    }
+
+
     public string getRessourceInformation(string resource, string information)
     {
         TextAsset textXMLAsset = Resources.Load<TextAsset>("resourceList");

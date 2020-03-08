@@ -10,6 +10,7 @@ public static class GlobalVariables
     public static Transform MainCamera = GameObject.Find("Main Camera").transform;
 
 
+    
 
 
     //MarketPlace-Resource variables

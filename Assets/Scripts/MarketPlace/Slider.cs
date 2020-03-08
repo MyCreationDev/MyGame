@@ -9,9 +9,24 @@ public class Slider : MonoBehaviour
     public int bevölkerung = 200; // In Public Variablen schreiben und aus diesen Ziehen. Vorerst als Testvariable;
     private int newAmount;
     public Transform SellAmount;
-   public void sliderValue(float value)
-   {
+    public GameObject GameManagerObject;
+    public Text ressource;
+    public Text price;
 
+
+
+
+
+    public void sliderValue(float value)
+    {
+
+        //GameManager.Instance.GetType().GetField("wood").GetValue(GameManagerObject.GetComponent<GameManager>());
+
+
+        //Debug.Log(UsedRessource);
+        Debug.Log(transform.parent.Find("Ressource").Find("RessourceName").GetComponent<Text>().text);
+        
+        
         //Angezeigte Menge aktualisieren
         newAmount = Mathf.RoundToInt(GameManager.Instance.stone*value); //ABSTRAHIEREN
         transform.Find("AmountValue").GetComponent<Text>().text = newAmount.ToString();
