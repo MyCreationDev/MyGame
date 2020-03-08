@@ -108,10 +108,10 @@ public class GameManager : MonoBehaviour
     }
 
     private void UpdateProduction(object sender, ElapsedEventArgs e)
-    {      
-        WoodDisplay.text = wood.ToString();
-        StoneDisplay.text = stone.ToString();
-        WoodPlanksDisplay.text = woodPlank.ToString();
+    {
+        WoodDisplay.text = GetResourceAmount("Wood").ToString();
+        StoneDisplay.text = GetResourceAmount("Stone").ToString();
+        WoodPlanksDisplay.text = GetResourceAmount("WoodPlank").ToString();
     }
 
     public void updateResources()

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicResource : MonoBehaviour
+public class BasicResource
 {
     public int CurrentAmount;
     public int Limit;
     public string ResourceName;
 
-    private void Start()
+    public BasicResource()
     {
         Limit = 1000;
     }

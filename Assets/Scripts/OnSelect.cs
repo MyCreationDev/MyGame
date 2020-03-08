@@ -39,8 +39,11 @@ public class OnSelect : MonoBehaviour
     {
         if (IsBuildingMode)
         {
-            IsBuildingMode = !IsBuildingMode;
-            return;
+            if (Input.GetMouseButtonDown(0))
+            {
+                IsBuildingMode = !IsBuildingMode;
+                return;
+            }
         }
 
         if(Input.GetMouseButtonDown(0) && Input.GetKey(KeyCode.LeftControl))

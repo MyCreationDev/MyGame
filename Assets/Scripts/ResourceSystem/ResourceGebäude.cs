@@ -10,7 +10,7 @@ public class ResourceGebäude : BasicGebäude
     public int ProductionAmount;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         ProductionTimer.Interval = ProductionIntervall;
         ProductionTimer.Elapsed += GenerateResource;

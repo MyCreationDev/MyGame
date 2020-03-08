@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class BasicGebäude : PlayerScripts
 {
-    public int BuildCostStone = 0;
-    public int BuildCostWood = 0;
-    public int BuildCostWoodPlank = 0;
+    public Dictionary<string, int> BuildCosts = new Dictionary<string, int>();
 
     // Start is called before the first frame update
     void Start()
@@ -23,19 +21,19 @@ public class BasicGebäude : PlayerScripts
 
     public bool CanBuyBuilding()
     {
-        if(BuildCostWood >= GameManager.Instance.wood &&
-            BuildCostStone >= GameManager.Instance.stone &&
-            BuildCostWoodPlank >= GameManager.Instance.woodPlank)
+        foreach(var resourceCost in BuildCosts)
         {
-            return true;
+            if (GameManager.Instance.GetResourceAmount(resourceCost.Key) < resourceCost.Value)
+                return false;
         }
-        return false;
+        return true;
     }
     
     public void BuyBuilding()
     {
-        GameManager.Instance.wood -= BuildCostWood;
-        GameManager.Instance.stone -= BuildCostStone;
-        GameManager.Instance.woodPlank -= BuildCostWoodPlank;
+        foreach (var resourceCost in BuildCosts)
+        {
+            GameManager.Instance.TryUseResources(resourceCost.Key, resourceCost.Value);
+        }
     }
 }

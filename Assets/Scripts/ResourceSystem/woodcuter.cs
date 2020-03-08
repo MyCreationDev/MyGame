@@ -10,11 +10,12 @@ public class woodcuter : ResourceGebäude
     {
         ProductionAmount = 5;
         ProductionIntervall = 2000;
+        base.Start();
     }
     protected override void GenerateResource(object sender, ElapsedEventArgs e)
     {
         base.GenerateResource(sender, e);
-        GameManager.Instance.wood += ProductionAmount;
+        GameManager.Instance.AddResource("Wood",ProductionAmount);
 
     }
 }

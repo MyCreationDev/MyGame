@@ -13,8 +13,9 @@ public class sawMill : ResourceGebäude
     // Start is called before the first frame update
     void Start()
     {
-        BuildCostStone = 20;
-        BuildCostWood = 50;
+        base.Start();
+        BuildCosts.Add("Wood", 50);
+        BuildCosts.Add("Wood", 20);
         ProductionAmount = 5;
         ProductionIntervall = 5000;
     }
@@ -27,10 +28,10 @@ public class sawMill : ResourceGebäude
     protected override void GenerateResource(object sender, ElapsedEventArgs e)
     {
         base.GenerateResource(sender, e);
-        if(GameManager.Instance.wood > woodCost)
+        if(GameManager.Instance.GetResourceAmount("Wood") >= woodCost)
         {
-            GameManager.Instance.wood -= woodCost;
-            GameManager.Instance.woodPlank += ProductionAmount;
+            GameManager.Instance.TryUseResources("Wood", woodCost);
+            GameManager.Instance.AddResource("WoodPlank", ProductionAmount);
         }
     }
     
