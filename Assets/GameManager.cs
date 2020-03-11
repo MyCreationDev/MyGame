@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI StoneDisplay;
     public TextMeshProUGUI WoodPlanksDisplay;
 
-    private int _productionIntervall = 500;
+    private float _productionIntervall = 0.5f;
+    private float _nextProductionUpdate = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -42,18 +43,18 @@ public class GameManager : MonoBehaviour
         Resourcen.Add(new BasicResource() { ResourceName = "Wood"});
         Resourcen.Add(new BasicResource() { ResourceName = "Stone"});
         Resourcen.Add(new BasicResource() { ResourceName = "WoodPlank"});
-
-        Timer ProductionIntervall = new Timer();
-        ProductionIntervall.Interval = _productionIntervall;
-        ProductionIntervall.Elapsed += UpdateProduction;
-        ProductionIntervall.Start();
+        
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.time > _nextProductionUpdate)
+        {
+            _nextProductionUpdate += _productionIntervall;
+            UpdateProduction();
+        }
     }
 
 
@@ -107,15 +108,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void UpdateProduction(object sender, ElapsedEventArgs e)
+    private void UpdateProduction()
     {
         WoodDisplay.text = GetResourceAmount("Wood").ToString();
         StoneDisplay.text = GetResourceAmount("Stone").ToString();
         WoodPlanksDisplay.text = GetResourceAmount("WoodPlank").ToString();
     }
-
-    public void updateResources()
-    {
-        
-    }
+    
 }
