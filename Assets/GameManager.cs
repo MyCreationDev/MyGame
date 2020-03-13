@@ -42,8 +42,9 @@ public class GameManager : MonoBehaviour
         Resourcen = new List<BasicResource>();
         Resourcen.Add(new BasicResource() { ResourceName = "Wood"});
         Resourcen.Add(new BasicResource() { ResourceName = "Stone"});
-        Resourcen.Add(new BasicResource() { ResourceName = "WoodPlank"});
-        
+        Resourcen.Add(new BasicResource() { ResourceName = "WoodPlank" });
+        Resourcen.Add(new BasicResource() { ResourceName = "Gold" });
+
     }
 
 
