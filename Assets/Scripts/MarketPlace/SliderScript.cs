@@ -20,7 +20,7 @@ public class SliderScript : MonoBehaviour
 
     private void Start()
     {
-        
+        MarketPlace = GameObject.Find("MarketPlaceInterface");
     }
 
 
@@ -30,13 +30,13 @@ public class SliderScript : MonoBehaviour
         //Debug.Log(GameManager.Instance.GetResourceAmount(ressource.text));
          
         //Angezeigte Menge aktualisieren
-        if(GetComponent<Slider>().value >= 0)
+        if(value < 0f)
         {
-            newAmount = Mathf.RoundToInt(GameManager.Instance.GetResourceAmount(ressource.text) * value);
+            newAmount = Mathf.RoundToInt(MarketPlace.GetComponent<MarketPlace>().woodAmount * value);
         }
         else
         {
-            newAmount = Mathf.RoundToInt(handelsmengeHOlz * value);
+            newAmount = Mathf.RoundToInt(GameManager.Instance.GetResourceAmount(ressource.text) * value);
         }
         
 
@@ -47,9 +47,9 @@ public class SliderScript : MonoBehaviour
     }
     public void calculateSellPrice(int amount)
     {
-        
 
-        var neededperHundred = float.Parse(MarketPlace.GetComponent<MarketPlace>().getRessourceInformation(ressource.text, "normalAmountPerHundred")); //Statt aus XML AUS GAMEMANGER!!!
+
+        var neededperHundred = 20; // float.Parse(MarketPlace.GetComponent<MarketPlace>().getRessourceInformation(ressource.text, "normalAmountPerHundred")); //Statt aus XML AUS GAMEMANGER!!!
 
         //Benötigte ressourcen ermitteln.
         int neededRessource = Mathf.RoundToInt( neededperHundred / 100f * bevölkerung)- handelsmengeHOlz;
@@ -57,7 +57,7 @@ public class SliderScript : MonoBehaviour
         //Preis ermitteln
         var priceToTrade = (gaußscheSumme(neededRessource) - gaußscheSumme(neededRessource - amount)) * 0.1 + amount;
         //Anzeige über zu handelnde Ware aktualisieren.
-        price.text = "5"; // (priceToTrade).ToString();
+        price.text = (priceToTrade).ToString();
     }
 
     public int gaußscheSumme(int i)

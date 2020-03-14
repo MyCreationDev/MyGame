@@ -10,9 +10,22 @@ public class MarketPlace : MonoBehaviour
     public int woodAmount;
     public int stoneAmount;
 
+
+    //StadtinventarVariablen
+    public float timer = 0;
+
     private void Update()
     {
+
+        timer += Time.deltaTime;
         
+        if(timer >= 30f)
+        {
+            woodAmount = Mathf.RoundToInt(Random.Range(-3f, 3f));
+            Debug.Log(woodAmount);
+            timer = 0;
+        }
+
     }
 
 
