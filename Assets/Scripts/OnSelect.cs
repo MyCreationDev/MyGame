@@ -9,6 +9,7 @@ public class OnSelect : MonoBehaviour
     //Singleton ansatz um zu garantieren dass nur ein OnSelect exisitert.
     private static OnSelect _instance;
     public static OnSelect Instance { get { return _instance; } }
+    public GameObject MarcetPlaceUI;
 
     private void Awake()
     {
@@ -149,7 +150,10 @@ public class OnSelect : MonoBehaviour
                 unitstoMove.GetComponent<Units>().SphereColliderOn();
             }
         }
-    
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            MarcetPlaceUI.SetActive(false);
+        }
         
     }
 
@@ -169,7 +173,7 @@ public class OnSelect : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Transform objectHit = hit.transform;
-            //Bei SphereCollider diesen ausschalten.
+            //Bei SphereCollider diesen auswählen. Z.B. bei Spielern.
             if(objectHit.gameObject.GetComponent<SphereCollider>())
             {
                 selectedUnits.Clear();
@@ -178,7 +182,7 @@ public class OnSelect : MonoBehaviour
                 ray = Camera.main.ScreenPointToRay(ClickPosition);
                 if(Physics.Raycast(ray, out hit))
                 {
-                    if(hit.collider.GetType().Name == "BoxCollider")
+                    if (hit.collider.GetType().Name == "BoxCollider")
                     {
                         if (hit.transform.gameObject.GetComponent<Units>())
                         {
@@ -199,10 +203,22 @@ public class OnSelect : MonoBehaviour
                     selectedUnits.Add(objectHit.gameObject);
                 }
             }
-            else if(objectHit.gameObject.GetComponent<MarketPlace>())
+            else
             {
+                string name = objectHit.gameObject.name;
+                switch(name)
+                {
+                    case "D_mo_market001":
+                        MarcetPlaceUI.SetActive(true);
+                        break;
+
+                    default:
+                        Debug.Log("NICHTS AUSGEWÄHLT");
+                        break;
+                    
+                        
+                }
                 //Marktplatz-Interface anzeigen
-                Debug.Log("Hello");
             }
         }
     }

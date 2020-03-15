@@ -22,7 +22,6 @@ public class MarketPlace : MonoBehaviour
         if(timer >= 30f)
         {
             woodAmount = Mathf.RoundToInt(Random.Range(-3f, 3f));
-            Debug.Log(woodAmount);
             timer = 0;
         }
 

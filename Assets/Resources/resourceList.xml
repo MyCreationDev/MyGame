@@ -1,10 +1,10 @@
 <resources>
-	<wood>
+	<Wood>
 		<duration>2</duration>
     <normalAmountPerHundred>30</normalAmountPerHundred>
-    <normalPrice>3</normalPrice>
-	</wood>
-	<woodPlanks>
+    <normalPrice>35</normalPrice>
+	</Wood>
+	<WoodPlank>
     <requirement>
       <wood>2</wood>
     </requirement>
@@ -12,10 +12,10 @@
     <amount>1</amount>
     <normalAmountPerHundred>20</normalAmountPerHundred>
     <normalPrice>3</normalPrice>
-	</woodPlanks>
-	<stone>
+	</WoodPlank>
+	<Stone>
 		<duration>7</duration>
     <normalAmountPerHundred>20</normalAmountPerHundred>
     <normalPrice>3</normalPrice>
-	</stone>
+	</Stone>
 </resources>

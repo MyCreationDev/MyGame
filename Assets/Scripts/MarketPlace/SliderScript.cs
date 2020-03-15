@@ -48,16 +48,21 @@ public class SliderScript : MonoBehaviour
     public void calculateSellPrice(int amount)
     {
 
-
-        var neededperHundred = 20; // float.Parse(MarketPlace.GetComponent<MarketPlace>().getRessourceInformation(ressource.text, "normalAmountPerHundred")); //Statt aus XML AUS GAMEMANGER!!!
+        Debug.Log(ressource.text);
+        var neededperHundred = float.Parse(getRessourceInfo(ressource.text, "normalAmountPerHundred")); //Statt aus XML AUS GAMEMANGER!!!
 
         //Benötigte ressourcen ermitteln.
         int neededRessource = Mathf.RoundToInt( neededperHundred / 100f * bevölkerung)- handelsmengeHOlz;
         
-        //Preis ermitteln
-        var priceToTrade = (gaußscheSumme(neededRessource) - gaußscheSumme(neededRessource - amount)) * 0.1 + amount;
+        //Preis ermitteln bei 3% Preisverhandlungen
+        var priceToTrade = (gaußscheSumme(neededRessource) - gaußscheSumme(neededRessource - amount)) * 0.03 + amount * int.Parse(getRessourceInfo(ressource.text, "normalPrice"));
         //Anzeige über zu handelnde Ware aktualisieren.
         price.text = (priceToTrade).ToString();
+    }
+    public string getRessourceInfo(string ressourceName, string info)
+    {
+        var gotInfo = MarketPlace.GetComponent<MarketPlace>().getRessourceInformation(ressourceName, info);
+        return gotInfo;
     }
 
     public int gaußscheSumme(int i)
