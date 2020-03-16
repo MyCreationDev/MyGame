@@ -18,4 +18,15 @@
     <normalAmountPerHundred>20</normalAmountPerHundred>
     <normalPrice>3</normalPrice>
 	</Stone>
+  <Silver>
+    <duration>10</duration>
+    <normalAmountPerHundred>20</normalAmountPerHundred>
+    <normalPrice>3</normalPrice>
+  </Silver>
+  <Bronze>
+    <duration>10</duration>
+    <normalAmountPerHundred>20</normalAmountPerHundred>
+    <normalPrice>3</normalPrice>
+  </Bronze>
+  
 </resources>

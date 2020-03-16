@@ -5,6 +5,7 @@ using System.Timers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Xml.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     }
 
     public List<BasicResource> Resourcen;
+    public List<CityInventory> CityResources;
     public int wood = 0;
     public int stone = 0;
     public int woodPlank = 0;
@@ -40,10 +42,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Resourcen = new List<BasicResource>();
-        Resourcen.Add(new BasicResource() { ResourceName = "Wood"});
-        Resourcen.Add(new BasicResource() { ResourceName = "Stone"});
-        Resourcen.Add(new BasicResource() { ResourceName = "WoodPlank" });
-        Resourcen.Add(new BasicResource() { ResourceName = "Gold" });
+        CityResources = new List<CityInventory>();
+        foreach (var RessourceNameToAddInResourcen in getAllRessourcesName())
+        {
+            CityResources.Add(new CityInventory() { ResourceName = RessourceNameToAddInResourcen });
+            Resourcen.Add(new BasicResource() { ResourceName = RessourceNameToAddInResourcen });
+        }
+        
 
     }
 
@@ -115,5 +120,26 @@ public class GameManager : MonoBehaviour
         StoneDisplay.text = GetResourceAmount("Stone").ToString();
         WoodPlanksDisplay.text = GetResourceAmount("WoodPlank").ToString();
     }
-    
+
+
+    //Alle Informationen aus der XML
+    public XElement getAllRessourceInfortmation()
+    {
+        TextAsset textXMLAsset = Resources.Load<TextAsset>("resourceList");
+        var doc = XDocument.Parse(textXMLAsset.text);
+        return doc.Element("resources");
+    }
+
+    //Alle Namen der vorhanden Ressourcen aus der XML
+    public List<string> list;
+    public List<string> getAllRessourcesName()
+    {
+        list = new List<string>();
+        foreach (var ressourceSingleName in getAllRessourceInfortmation().Elements())
+        {
+            list.Add(ressourceSingleName.Name.ToString());
+        }
+        return list;
+    }
+
 }

@@ -2482,7 +2482,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MarcetPlaceUI: {fileID: 908034471}
-  EventSystemGO: {fileID: 1911352021}
   selectedUnits: []
   layoutSelectionBox: {fileID: 1447620098}
   selectableUnits: []
@@ -3452,7 +3451,6 @@ GameObject:
   - component: {fileID: 2022050345}
   - component: {fileID: 2022050344}
   - component: {fileID: 2022050346}
-  - component: {fileID: 2022050347}
   - component: {fileID: 2022050348}
   m_Layer: 5
   m_Name: MarketPlaceInterface
@@ -3544,21 +3542,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &2022050347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022050342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe790d22865eb44fa642ddca0e84829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  woodAmount: 0
-  stoneAmount: 0
-  timer: 0
 --- !u!114 &2022050348
 MonoBehaviour:
   m_ObjectHideFlags: 0

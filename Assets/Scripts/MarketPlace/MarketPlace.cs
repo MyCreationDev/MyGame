@@ -12,7 +12,7 @@ public class MarketPlace : MonoBehaviour
 
 
     //StadtinventarVariablen
-    public float timer = 0;
+    private float timer = 0;
 
     private void Update()
     {
@@ -30,9 +30,7 @@ public class MarketPlace : MonoBehaviour
 
     public string getRessourceInformation(string resource, string information)
     {
-        TextAsset textXMLAsset = Resources.Load<TextAsset>("resourceList");
-        var doc = XDocument.Parse(textXMLAsset.text);
-        var alldict = doc.Element("resources").Elements();
+        var alldict = GameManager.Instance.getAllRessourceInfortmation().Elements();
         foreach (var oneDict in alldict)
         {
             if (oneDict.Name == resource)
@@ -44,7 +42,6 @@ public class MarketPlace : MonoBehaviour
                     return singleDict.Value;
                 }
             }
-            
         }
         return "";
     }
