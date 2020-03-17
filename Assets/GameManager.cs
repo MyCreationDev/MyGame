@@ -48,8 +48,6 @@ public class GameManager : MonoBehaviour
             CityResources.Add(new CityInventory() { ResourceName = RessourceNameToAddInResourcen });
             Resourcen.Add(new BasicResource() { ResourceName = RessourceNameToAddInResourcen });
         }
-        
-
     }
 
 

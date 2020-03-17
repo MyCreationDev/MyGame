@@ -51,13 +51,15 @@ public class OnSelect : MonoBehaviour
         {
             selectUnit(true);
         }
-        
         else if(Input.GetMouseButtonDown(0))
         {
+
+            //DoppelKlickEvent mit Timer erstellen
+
+
             //Prüfen, was angelickt wurde
             selectUnit(false);
         }
-
         //SelectionBox - Mehrfachauswahl von Einheiten/Gebäuden
         //GEBÄUDE NOCH NICHT IMPLEMENTIERT. ABSTRAKTION FEHLT
         else if(Input.GetMouseButton(0))
@@ -152,9 +154,8 @@ public class OnSelect : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            MarcetPlaceUI.SetActive(false);
+            MarcetPlaceUI.SetActive(false); //Liste die geöffneten UI's eintragen und dann mit ESC den letzten Eintrag schließen. AKTIVEN EINTRAG SCHLIEßEN?!
         }
-        
     }
 
     void selectUnit(bool withControl)
@@ -213,7 +214,6 @@ public class OnSelect : MonoBehaviour
                         break;
 
                     default:
-                        Debug.Log("NICHTS AUSGEWÄHLT");
                         break;
                     
                         
