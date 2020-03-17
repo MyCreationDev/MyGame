@@ -11,11 +11,6 @@ public class craftingList : MonoBehaviour
 
     private List<string> returnvalue;
 
-
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         string data = xmlRawFile.text;
@@ -58,5 +53,4 @@ public class craftingList : MonoBehaviour
         }
         return returnvalue;
     }
-
 }
