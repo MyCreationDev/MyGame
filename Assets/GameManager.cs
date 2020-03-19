@@ -31,23 +31,42 @@ public class GameManager : MonoBehaviour
     public int stone = 0;
     public int woodPlank = 0;
 
-    public TextMeshProUGUI WoodDisplay;
-    public TextMeshProUGUI StoneDisplay;
-    public TextMeshProUGUI WoodPlanksDisplay;
+    //BuildMenue variables
+    public Transform BuildMenuResources;
+    public GameObject ButtonBuildungGroupName;
+    public GameObject ButtonBuilding;
+    
 
     private float _productionIntervall = 0.5f;
     private float _nextProductionUpdate = 0;
 
+    private List<TextMeshProUGUI> ResourceDisplays;
+    public Transform ResourceDisplayPanel;
+    public GameObject ResourceDisplay;
     // Start is called before the first frame update
     void Start()
     {
+        //Inventar für Spieler und Stadt instanziieren.
         Resourcen = new List<BasicResource>();
         CityResources = new List<CityInventory>();
-        foreach (var RessourceNameToAddInResourcen in getAllRessourcesName())
+        foreach (var RessourceNameToAddInResourcen in getNextLevelInformation("resourceList", "resources"))
         {
             CityResources.Add(new CityInventory() { ResourceName = RessourceNameToAddInResourcen });
             Resourcen.Add(new BasicResource() { ResourceName = RessourceNameToAddInResourcen });
         }
+
+        ResourceDisplays = new List<TextMeshProUGUI>();
+        //Angezeigtes SpielerInventar erstellen
+        foreach(var a in Resourcen)
+        {
+            var ResourceDisplayed = Instantiate(ResourceDisplay, ResourceDisplayPanel);
+            ResourceDisplayed.transform.Find("ResourceName").GetComponent<TextMeshProUGUI>().text = a.ResourceName;
+            ResourceDisplayed.transform.Find("ResourceAmount").GetComponent<TextMeshProUGUI>().text = a.CurrentAmount.ToString();
+            ResourceDisplays.Add(ResourceDisplayed.transform.Find("ResourceAmount").GetComponent<TextMeshProUGUI>());
+        }
+
+        //Create BuildingUI
+        buildbuildingInterface();
     }
 
 
@@ -114,30 +133,84 @@ public class GameManager : MonoBehaviour
 
     private void UpdateProduction()
     {
+        foreach(var a in ResourceDisplays)
+        {
+
+            Debug.Log(a.transform.parent.transform.Find("ResourceName").GetComponent<Text>().text);
+            a.text = GetResourceAmount(a.transform.parent.transform.Find("ResourceName").GetComponent<Text>().text).ToString();
+        }
+        /*
         WoodDisplay.text = GetResourceAmount("Wood").ToString();
         StoneDisplay.text = GetResourceAmount("Stone").ToString();
-        WoodPlanksDisplay.text = GetResourceAmount("WoodPlank").ToString();
+        WoodPlanksDisplay.text = GetResourceAmount("WoodPlank").ToString();*/
     }
 
 
     //Alle Informationen aus der XML
-    public XElement getAllRessourceInfortmation()
+    public XElement getAllXMLInfortmation(string XMLName, string XMLHeaderName)
     {
-        TextAsset textXMLAsset = Resources.Load<TextAsset>("resourceList");
+        TextAsset textXMLAsset = Resources.Load<TextAsset>(XMLName);
         var doc = XDocument.Parse(textXMLAsset.text);
-        return doc.Element("resources");
+        return doc.Element(XMLHeaderName);
     }
 
     //Alle Namen der vorhanden Ressourcen aus der XML
-    public List<string> list;
-    public List<string> getAllRessourcesName()
+    private List<string> list = new List<string>();
+    public List<string> getNextLevelInformation(string XMLName, string XMLHeaderName, string Level = default(string))
     {
         list = new List<string>();
-        foreach (var ressourceSingleName in getAllRessourceInfortmation().Elements())
+        var XMLCOMPLETE = getAllXMLInfortmation(XMLName, XMLHeaderName);
+        if (Level == default(string))
         {
-            list.Add(ressourceSingleName.Name.ToString());
+            foreach (var XMLInformation in XMLCOMPLETE.Elements())
+            {
+                list.Add(XMLInformation.Name.ToString());
+            }
         }
+        else
+        {
+            foreach (var XMLInformation in XMLCOMPLETE.Elements())
+            {
+                if (XMLInformation.Name == Level)
+                {
+                    foreach (var XMLPART in XMLInformation.Elements())
+                    {
+                        list.Add(XMLPART.Name.ToString());
+                    }
+                    
+                }
+                
+            }
+        } 
         return list;
     }
 
+    public GameObject BuildManagerGameObject;
+    public List<GameObject> Buildings;
+    public GameObject TEST;
+    public void buildbuildingInterface()
+    {
+        foreach(var a in getNextLevelInformation("buildings", "buildings"))
+        {
+            
+            foreach (string i in getNextLevelInformation("buildings", "buildings",a.ToString()))
+            {
+                var BuildingGroup = Instantiate(ButtonBuilding, BuildMenuResources);
+                BuildingGroup.transform.Find("Text").GetComponent<Text>().text = i;
+                //Eine Liste mit allen GameObject. Daraus das mit dem Wert i suchen und in 'Build()' einfügen.
+                //BuildingGroup.GetComponent<Button>().onClick.AddListener(BuildManagerGameObject.GetComponent<BuildManager>().Build(TEST)); // += BuildManagerGameObject.GetComponent<BuildManager>().Build(TEST);
+            }
+        }
+        
+        
+    }
+    public void blssa()
+    {
+        Debug.Log("sd");
+    }
 }
+
+/*
+public Transform BuildMenuResources;
+public GameObject ButtonBuildungGroupName;
+public GameObject ButtonBuilding;*/

@@ -28,5 +28,6 @@ public class BuildManager : MonoBehaviour
             CurrentlySelectedPrefab = Instantiate(PrefabToBuild, Enviroment.transform);
             OnSelect.Instance.IsBuildingMode = true;
         }
+        
     }
 }

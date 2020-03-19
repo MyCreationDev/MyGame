@@ -47,8 +47,6 @@ public class SliderScript : MonoBehaviour
     }
     public void calculateSellPrice(int amount)
     {
-
-        Debug.Log(ressource.text);
         var neededperHundred = float.Parse(getRessourceInfo(ressource.text, "normalAmountPerHundred")); //Statt aus XML AUS GAMEMANGER!!!
 
         //Benötigte ressourcen ermitteln.

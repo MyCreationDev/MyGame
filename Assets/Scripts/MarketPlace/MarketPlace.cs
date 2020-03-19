@@ -30,7 +30,7 @@ public class MarketPlace : MonoBehaviour
 
     public string getRessourceInformation(string resource, string information)
     {
-        var alldict = GameManager.Instance.getAllRessourceInfortmation().Elements();
+        var alldict = GameManager.Instance.getAllXMLInfortmation("resourceList", "resources").Elements();
         foreach (var oneDict in alldict)
         {
             if (oneDict.Name == resource)

@@ -28,5 +28,12 @@
     <normalAmountPerHundred>20</normalAmountPerHundred>
     <normalPrice>3</normalPrice>
   </Bronze>
-  
+  <Gold>
+    <Human>10</Human>
+    <amount>1</amount>
+    <duration>2</duration>
+  </Gold>
+  <Human>
+    <normalPrice>200</normalPrice>
+  </Human>
 </resources>
