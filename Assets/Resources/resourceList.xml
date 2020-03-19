@@ -1,6 +1,7 @@
 <resources>
 	<Wood>
 		<duration>2</duration>
+    <produceAmount>1</produceAmount>
     <normalAmountPerHundred>30</normalAmountPerHundred>
     <normalPrice>35</normalPrice>
 	</Wood>
@@ -9,22 +10,25 @@
       <wood>2</wood>
     </requirement>
     <duration>5</duration>
-    <amount>1</amount>
+    <produceAmount>1</produceAmount>
     <normalAmountPerHundred>20</normalAmountPerHundred>
     <normalPrice>3</normalPrice>
 	</WoodPlank>
 	<Stone>
 		<duration>7</duration>
+    <produceAmount>1</produceAmount>
     <normalAmountPerHundred>20</normalAmountPerHundred>
     <normalPrice>3</normalPrice>
 	</Stone>
   <Silver>
     <duration>10</duration>
+    <produceAmount>2</produceAmount>
     <normalAmountPerHundred>20</normalAmountPerHundred>
     <normalPrice>3</normalPrice>
   </Silver>
   <Bronze>
     <duration>10</duration>
+    <produceAmount>1</produceAmount>
     <normalAmountPerHundred>20</normalAmountPerHundred>
     <normalPrice>3</normalPrice>
   </Bronze>
@@ -33,7 +37,4 @@
     <amount>1</amount>
     <duration>2</duration>
   </Gold>
-  <Human>
-    <normalPrice>200</normalPrice>
-  </Human>
 </resources>

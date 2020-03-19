@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
             ResourceDisplayed.transform.Find("ResourceAmount").GetComponent<TextMeshProUGUI>().text = a.CurrentAmount.ToString();
             ResourceDisplays.Add(ResourceDisplayed.transform.Find("ResourceAmount").GetComponent<TextMeshProUGUI>());
         }
-
         //Create BuildingUI
         buildbuildingInterface();
     }
@@ -135,9 +134,7 @@ public class GameManager : MonoBehaviour
     {
         foreach(var a in ResourceDisplays)
         {
-
-            Debug.Log(a.transform.parent.transform.Find("ResourceName").GetComponent<Text>().text);
-            a.text = GetResourceAmount(a.transform.parent.transform.Find("ResourceName").GetComponent<Text>().text).ToString();
+            a.text = GetResourceAmount(a.gameObject.transform.parent.transform.Find("ResourceName").GetComponent<TextMeshProUGUI>().text).ToString();
         }
         /*
         WoodDisplay.text = GetResourceAmount("Wood").ToString();
@@ -177,9 +174,7 @@ public class GameManager : MonoBehaviour
                     {
                         list.Add(XMLPART.Name.ToString());
                     }
-                    
                 }
-                
             }
         } 
         return list;
@@ -197,16 +192,13 @@ public class GameManager : MonoBehaviour
             {
                 var BuildingGroup = Instantiate(ButtonBuilding, BuildMenuResources);
                 BuildingGroup.transform.Find("Text").GetComponent<Text>().text = i;
+                BuildingGroup.SetActive(false);
                 //Eine Liste mit allen GameObject. Daraus das mit dem Wert i suchen und in 'Build()' einfügen.
                 //BuildingGroup.GetComponent<Button>().onClick.AddListener(BuildManagerGameObject.GetComponent<BuildManager>().Build(TEST)); // += BuildManagerGameObject.GetComponent<BuildManager>().Build(TEST);
             }
         }
         
         
-    }
-    public void blssa()
-    {
-        Debug.Log("sd");
     }
 }
 
