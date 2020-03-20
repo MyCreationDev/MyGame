@@ -724,8 +724,10 @@ MonoBehaviour:
   ResourceDisplay: {fileID: 1827259075735205959, guid: 01ababbe39d4a794abf8925b1f1b324c,
     type: 3}
   BuildManagerGameObject: {fileID: 1710252147}
-  Buildings: []
-  TEST: {fileID: -927199367670048503, guid: 059265e05fa0db44d9c578cf01df2984, type: 3}
+  Buildings:
+  - {fileID: 8569865350730302090, guid: f2493433241a8b3438f5573b30fff4ad, type: 3}
+  - {fileID: 499697814204419533, guid: a2aec7a17a6a9c84ab75098831f4fbca, type: 3}
+  TEST: {fileID: 499697814204419533, guid: a2aec7a17a6a9c84ab75098831f4fbca, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

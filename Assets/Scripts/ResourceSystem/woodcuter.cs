@@ -16,6 +16,5 @@ public class woodcuter : ResourceGebäude
     {
         base.GenerateResource(sender, e);
         GameManager.Instance.AddResource("Wood",ProductionAmount);
-
     }
 }

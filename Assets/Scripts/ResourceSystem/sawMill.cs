@@ -15,7 +15,6 @@ public class sawMill : ResourceGebäude
     {
         base.Start();
         BuildCosts.Add("Wood", 50);
-        BuildCosts.Add("Wood", 20);
         ProductionAmount = 5;
         ProductionIntervall = 5000;
     }

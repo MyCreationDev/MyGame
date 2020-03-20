@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Xml.Linq;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,13 +50,14 @@ public class GameManager : MonoBehaviour
         //Inventar für Spieler und Stadt instanziieren.
         Resourcen = new List<BasicResource>();
         CityResources = new List<CityInventory>();
-        foreach (var RessourceNameToAddInResourcen in getNextLevelInformation("resourceList", "resources"))
+        foreach (var RessourceNameToAddInResourcen in getNextLevelInformation("resourceList", "resources").Elements())
         {
-            CityResources.Add(new CityInventory() { ResourceName = RessourceNameToAddInResourcen });
-            Resourcen.Add(new BasicResource() { ResourceName = RessourceNameToAddInResourcen });
+            CityResources.Add(new CityInventory() { ResourceName = RessourceNameToAddInResourcen.Name.ToString() });
+            Resourcen.Add(new BasicResource() { ResourceName = RessourceNameToAddInResourcen.Name.ToString() });
         }
 
         ResourceDisplays = new List<TextMeshProUGUI>();
+
         //Angezeigtes SpielerInventar erstellen
         foreach(var a in Resourcen)
         {
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
             ResourceDisplayed.transform.Find("ResourceAmount").GetComponent<TextMeshProUGUI>().text = a.CurrentAmount.ToString();
             ResourceDisplays.Add(ResourceDisplayed.transform.Find("ResourceAmount").GetComponent<TextMeshProUGUI>());
         }
+
         //Create BuildingUI
         buildbuildingInterface();
     }
@@ -152,53 +155,66 @@ public class GameManager : MonoBehaviour
     }
 
     //Alle Namen der vorhanden Ressourcen aus der XML
-    private List<string> list = new List<string>();
-    public List<string> getNextLevelInformation(string XMLName, string XMLHeaderName, string Level = default(string))
+    private XElement list;
+    public XElement getNextLevelInformation(string XMLName, string XMLHeaderName, XElement Level = default(XElement))
     {
-        list = new List<string>();
+
         var XMLCOMPLETE = getAllXMLInfortmation(XMLName, XMLHeaderName);
-        if (Level == default(string))
+        //Debug.Log(XMLCOMPLETE);
+        if (Level == default(XElement))
         {
-            foreach (var XMLInformation in XMLCOMPLETE.Elements())
-            {
-                list.Add(XMLInformation.Name.ToString());
-            }
+                list = XMLCOMPLETE;
         }
         else
         {
             foreach (var XMLInformation in XMLCOMPLETE.Elements())
             {
-                if (XMLInformation.Name == Level)
-                {
                     foreach (var XMLPART in XMLInformation.Elements())
                     {
-                        list.Add(XMLPART.Name.ToString());
+                        list = XMLPART;
                     }
-                }
             }
         } 
         return list;
     }
 
+
+    //Interface für das Baumenü
     public GameObject BuildManagerGameObject;
     public List<GameObject> Buildings;
     public GameObject TEST;
+    public UnityAction buildAction;
     public void buildbuildingInterface()
     {
-        foreach(var a in getNextLevelInformation("buildings", "buildings"))
+        foreach(var a in getNextLevelInformation("buildings", "buildings").Elements())
         {
             
-            foreach (string i in getNextLevelInformation("buildings", "buildings",a.ToString()))
+            //Objekte zuweisen!!
+            
+            foreach (var i in a.Elements())
             {
                 var BuildingGroup = Instantiate(ButtonBuilding, BuildMenuResources);
-                BuildingGroup.transform.Find("Text").GetComponent<Text>().text = i;
-                BuildingGroup.SetActive(false);
-                //Eine Liste mit allen GameObject. Daraus das mit dem Wert i suchen und in 'Build()' einfügen.
-                //BuildingGroup.GetComponent<Button>().onClick.AddListener(BuildManagerGameObject.GetComponent<BuildManager>().Build(TEST)); // += BuildManagerGameObject.GetComponent<BuildManager>().Build(TEST);
+                BuildingGroup.transform.Find("Text").GetComponent<Text>().text = i.Name.ToString();
+                foreach(var c in i.Elements())
+                {
+                    if(c.Name == "objectname")
+                    {
+                        foreach(var b in Buildings)
+                        {
+                            if(b.name == c.Value)
+                            {
+                                Debug.Log(c.Value);
+                                BuildingGroup.GetComponent<Button>().onClick.AddListener(delegate { BuildManagerGameObject.GetComponent<BuildManager>().Build(b); });
+                                b.AddComponent<woodcuter>();
+                            }
+                        }
+                        
+                    }
+                    
+                }
+                
             }
         }
-        
-        
     }
 }
 
