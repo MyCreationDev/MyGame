@@ -71,12 +71,10 @@ public class SliderScript : MonoBehaviour
 
     public void traden()
     {
-        
         GameManager.Instance.AddResource(ressource.text, int.Parse(SellAmount.text)*-1);
         //MarktplatzInventar anpassen
         handelsmengeHOlz = handelsmengeHOlz + int.Parse(SellAmount.text);
         sliderValue(0f);
         GetComponent<Slider>().value = 0;
     }
-
 }

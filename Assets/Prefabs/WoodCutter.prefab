@@ -1458,6 +1458,10 @@ GameObject:
   - component: {fileID: 6815351301758871363}
   - component: {fileID: -4989830781695694723}
   - component: {fileID: -6196385705587306640}
+  - component: {fileID: -3684333058436998757}
+  - component: {fileID: -2517560081166820036}
+  - component: {fileID: 3873852829288376145}
+  - component: {fileID: 929527865870388845}
   m_Layer: 0
   m_Name: WoodCutter
   m_TagString: Untagged
@@ -1526,6 +1530,66 @@ MonoBehaviour:
   ProductionIntervall: 0
   ProductionAmount: 0
 --- !u!114 &-6196385705587306640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499697814204419533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03470cc680620d9408c7d7f9aed60e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playername: Mike
+  ProductionIntervall: 0
+  ProductionAmount: 0
+--- !u!114 &-3684333058436998757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499697814204419533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03470cc680620d9408c7d7f9aed60e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playername: Mike
+  ProductionIntervall: 0
+  ProductionAmount: 0
+--- !u!114 &-2517560081166820036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499697814204419533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03470cc680620d9408c7d7f9aed60e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playername: Mike
+  ProductionIntervall: 0
+  ProductionAmount: 0
+--- !u!114 &3873852829288376145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499697814204419533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03470cc680620d9408c7d7f9aed60e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playername: Mike
+  ProductionIntervall: 0
+  ProductionAmount: 0
+--- !u!114 &929527865870388845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
