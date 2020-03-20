@@ -15,7 +15,6 @@ public class sawMill : ResourceGebäude
     {
         base.Start();
         BuildCosts.Add("Wood", 50);
-        ProductionAmount = 5;
         ProductionIntervall = 5000;
     }
 
@@ -30,7 +29,7 @@ public class sawMill : ResourceGebäude
         if(GameManager.Instance.GetResourceAmount("Wood") >= woodCost)
         {
             GameManager.Instance.TryUseResources("Wood", woodCost);
-            GameManager.Instance.AddResource("WoodPlank", ProductionAmount);
+           // GameManager.Instance.AddResource("WoodPlank", ProductionAmount);
         }
     }
     

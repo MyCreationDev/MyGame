@@ -14,6 +14,6 @@ public class StoneMine : ResourceGebäude
     protected override void GenerateResource(object sender, ElapsedEventArgs e)
     {
         base.GenerateResource(sender, e);
-        GameManager.Instance.AddResource("Stone", ProductionAmount);
+       // GameManager.Instance.AddResource("Stone", ProductionAmount);
     }
 }

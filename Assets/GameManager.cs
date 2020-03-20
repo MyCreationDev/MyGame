@@ -188,9 +188,7 @@ public class GameManager : MonoBehaviour
     {
         foreach(var a in getNextLevelInformation("buildings", "buildings").Elements())
         {
-            
             //Objekte zuweisen!!
-            
             foreach (var i in a.Elements())
             {
                 var BuildingGroup = Instantiate(ButtonBuilding, BuildMenuResources);
@@ -205,14 +203,14 @@ public class GameManager : MonoBehaviour
                             if (b.name == c.Value)
                             {
                                 BuildingGroup.GetComponent<Button>().onClick.AddListener(delegate { BuildManagerGameObject.GetComponent<BuildManager>().Build(b); });
-                                b.AddComponent<woodcuter>();
+                                if(!b.GetComponent<woodcuter>())
+                                {
+                                    b.AddComponent<woodcuter>();
+                                }
                             }
                         }
-                        
                     }
-                    
                 }
-                
             }
         }
     }

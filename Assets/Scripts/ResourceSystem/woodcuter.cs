@@ -5,16 +5,26 @@ using UnityEngine;
 
 public class woodcuter : ResourceGebäude
 {
-
+    public ResourceProductionSystem Production;   
     private void Start()
     {
-        ProductionAmount = 5;
-        ProductionIntervall = 2000;
+        ProductionIntervall = Production.duration;
         base.Start();
     }
     protected override void GenerateResource(object sender, ElapsedEventArgs e)
     {
+        
         base.GenerateResource(sender, e);
-        GameManager.Instance.AddResource("Wood",ProductionAmount);
+        foreach(var b in Production.NeedGoods)
+        {
+            GameManager.Instance.TryUseResources(b.ProductName, b.Amount * -1);
+        }
+
+
+        foreach (var a in Production.Product)
+        {
+            GameManager.Instance.AddResource(a.ProductName, a.Amount);
+        }
+        
     }
 }
