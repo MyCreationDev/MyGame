@@ -839,7 +839,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7056124961378497907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b51b2210493931745910cfe893c6892c, type: 3}
+  m_Script: {fileID: 11500000, guid: 77b4902d76088d046889e12f7f7ba2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   "bev\xF6lkerung": 200
@@ -847,8 +847,8 @@ MonoBehaviour:
   ressource: {fileID: 483306229746898157}
   price: {fileID: 7429855826202521274}
   MarketPlace: {fileID: 0}
-  handelsmengeStein: 10
-  handelsmengeHOlz: 5
+  handelsmengeStein: 0
+  handelsmengeHOlz: 0
 --- !u!1 &7796943925492214576
 GameObject:
   m_ObjectHideFlags: 0
