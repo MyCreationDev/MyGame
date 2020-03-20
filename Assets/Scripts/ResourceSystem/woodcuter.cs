@@ -13,18 +13,10 @@ public class woodcuter : ResourceGebäude
     }
     protected override void GenerateResource(object sender, ElapsedEventArgs e)
     {
-        
-        base.GenerateResource(sender, e);
-        foreach(var b in Production.NeedGoods)
-        {
-            GameManager.Instance.TryUseResources(b.ProductName, b.Amount * -1);
-        }
-
-
+        GameManager.Instance.TryUseResources(Production.NeedGoods);
         foreach (var a in Production.Product)
         {
             GameManager.Instance.AddResource(a.ProductName, a.Amount);
         }
-        
     }
 }

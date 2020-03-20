@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public List<BasicResource> Resourcen;
     public List<CityInventory> CityResources;
     public int wood = 0;
@@ -117,6 +118,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    internal bool TryUseResources(List<goods> needGoods)
+    {
+        foreach(var good in needGoods)
+        {
+            BasicResource resource = Resourcen.Find(x => x.ResourceName == good.ProductName);
+            if (resource == null)
+            {
+                Debug.Log($"Resource {good.ProductName} nicht gefunden.");
+                return false;
+            }
+            else
+            {
+                if (resource.CurrentAmount < good.Amount)
+                {
+                    Debug.Log($"Nicht genügend Resourcen von {good.ProductName} vorhanden.");
+                    return false;
+                }
+            }
+        }
+        foreach(var good in needGoods)
+        {
+            AddResource(good.ProductName, -good.Amount);
+        }
+        return true;
+    }
+
     public bool AddResource(string resourceToAdd,int resourceAmount)
     {
         BasicResource resource = Resourcen.Find(x => x.ResourceName == resourceToAdd);
@@ -206,6 +234,27 @@ public class GameManager : MonoBehaviour
                                 if(!b.GetComponent<woodcuter>())
                                 {
                                     b.AddComponent<woodcuter>();
+                                }
+
+                            }
+                        }
+                    }
+
+                    ResourceProductionSystem rps = new ResourceProductionSystem();
+                    if (c.Name == "produces")
+                    {
+                        foreach (var resource in getNextLevelInformation("resourceList", "resources").Elements())
+                        {
+                            if(resource.Name == c.Value)
+                            {
+                                foreach (var elem in c.Elements())
+                                {
+                                    if (elem.Name == "duration")
+                                        rps.duration = int.Parse(elem.Value);
+                                    if(elem.Name == "produceAmount")
+                                    {
+
+                                    }
                                 }
                             }
                         }
