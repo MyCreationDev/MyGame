@@ -6,17 +6,9 @@ using UnityEngine;
 public class woodcuter : ResourceGebäude
 {
 
+    public int te;
 
-    public ResourceProductionSystem Production;
-    [HideInInspector]
-    public List<ResourceProductionSystem> production;
-    public List<goods> products;
-    public List<goods> consumption;
-
-    public int test;
-
-
-    private void Start()
+    private void Awake()
     {
         /*
         var list = new List<string>();
@@ -26,7 +18,7 @@ public class woodcuter : ResourceGebäude
 
 
         products.Add(new goods { ProductName = "Wood", Amount = 4 });
-        //consumption.Add(new goods { ProductName = "Wood", Amount = 5 });
+        consumption.Add(new goods { ProductName = "Wood", Amount = 5 });
         production.Add(new ResourceProductionSystem { Product = products, duration = 500, NeedGoods = consumption});
         Production = production[0];*/
 

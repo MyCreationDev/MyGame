@@ -210,7 +210,6 @@ public class GameManager : MonoBehaviour
     //Interface für das Baumenü
     public GameObject BuildManagerGameObject;
     public List<GameObject> Buildings;
-    public GameObject TEST;
     public UnityAction buildAction;
     public void buildbuildingInterface()
     {
@@ -240,8 +239,7 @@ public class GameManager : MonoBehaviour
                             }
                         }
                     }
-
-                    
+                    Debug.Log(Buildings[1].GetComponent<woodcuter>().Production);
                     if (c.Name == "produces")
                     {
                         foreach (var resource in getNextLevelInformation("resourceList", "resources").Elements())
@@ -268,10 +266,14 @@ public class GameManager : MonoBehaviour
                         }
                     }
                 }
-                if (rps != new ResourceProductionSystem())
+                if (rps.Product.Count > 0)
                 {
-                    if(currentBuilding != null)
+                    if (currentBuilding != null)
+                    {
                         currentBuilding.GetComponent<woodcuter>().Production = rps;
+                        Debug.Log(currentBuilding.GetComponent<woodcuter>().Production.Product[0].ProductName); //Das Script übernimmt die Variable!! :)
+                    }
+                        
                     //BuildingGroup.GetComponent<woodcuter>().Production = rps;
                 }
             }

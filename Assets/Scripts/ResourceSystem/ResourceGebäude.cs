@@ -7,6 +7,7 @@ public class ResourceGebäude : BasicGebäude
 {
     private Timer ProductionTimer = new Timer();
     public int ProductionIntervall;
+    public ResourceProductionSystem Production;
 
     // Start is called before the first frame update
     public void Start()
