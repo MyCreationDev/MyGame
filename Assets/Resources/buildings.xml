@@ -6,7 +6,6 @@
 			<requirement>
 				<woodPlanks>20</woodPlanks>
 			</requirement>
-			<produces>wood</produces>
 		</huette>
 	</wohngebauede>
 	<resourcenbuildings>
@@ -16,7 +15,7 @@
 			<requirement>
 				<woodPlanks>20</woodPlanks>
 			</requirement>
-			<produces>wood</produces>
+			<produces>Wood</produces>
 		</holzfaellerei>
 		<sawMill>
       <objectname>sawMill</objectname>
@@ -24,7 +23,7 @@
 			<requirement>
 				<woodPlanks>20</woodPlanks>
 			</requirement>
-			<produces>wood</produces>
+			<produces>WoodPlanks</produces>
 		</sawMill>
 		<steinbruch>
       <objectname>stoneMiner</objectname>
@@ -32,7 +31,7 @@
 			<requirement>
 				<woodPlanks>20</woodPlanks>
 			</requirement>
-			<produces>wood</produces>
+			<produces>Stone</produces>
 		</steinbruch>
 	</resourcenbuildings>
 </buildings>

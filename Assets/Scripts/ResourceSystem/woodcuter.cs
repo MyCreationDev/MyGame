@@ -5,18 +5,59 @@ using UnityEngine;
 
 public class woodcuter : ResourceGebäude
 {
-    public ResourceProductionSystem Production;   
+
+
+    public ResourceProductionSystem Production;
+    [HideInInspector]
+    public List<ResourceProductionSystem> production;
+    public List<goods> products;
+    public List<goods> consumption;
+
+    public int test;
+
+
     private void Start()
     {
+        /*
+        var list = new List<string>();
+        products = new List<goods>();
+        production = new List<ResourceProductionSystem>();
+        consumption = products;
+
+
+        products.Add(new goods { ProductName = "Wood", Amount = 4 });
+        //consumption.Add(new goods { ProductName = "Wood", Amount = 5 });
+        production.Add(new ResourceProductionSystem { Product = products, duration = 500, NeedGoods = consumption});
+        Production = production[0];*/
+
+        Debug.Log(Production);
         ProductionIntervall = Production.duration;
         base.Start();
     }
+
     protected override void GenerateResource(object sender, ElapsedEventArgs e)
     {
-        GameManager.Instance.TryUseResources(Production.NeedGoods);
-        foreach (var a in Production.Product)
+        if (Production.NeedGoods.Count > 0)
         {
-            GameManager.Instance.AddResource(a.ProductName, a.Amount);
+            if (GameManager.Instance.TryUseResources(Production.NeedGoods))
+            {
+                foreach (goods b in Production.NeedGoods)
+                {
+                    GameManager.Instance.AddResource(b.ProductName, b.Amount *-1);
+                }
+                foreach (goods a in Production.Product)
+                {
+                    GameManager.Instance.AddResource(a.ProductName, a.Amount);
+                }
+            }
         }
+        else
+        {
+            foreach (goods a in Production.Product)
+            {
+                GameManager.Instance.AddResource(a.ProductName, a.Amount);
+            }
+        }
+        
     }
 }

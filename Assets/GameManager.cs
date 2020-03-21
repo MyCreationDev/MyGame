@@ -221,13 +221,13 @@ public class GameManager : MonoBehaviour
             {
                 var BuildingGroup = Instantiate(ButtonBuilding, BuildMenuResources);
                 BuildingGroup.transform.Find("Text").GetComponent<Text>().text = i.Name.ToString();
-                foreach(var c in i.Elements())
+                ResourceProductionSystem rps = new ResourceProductionSystem();
+                foreach (var c in i.Elements())
                 {
                     if(c.Name == "objectname")
                     {
                         foreach(var b in Buildings)
                         {
-                            Debug.Log(b.name);
                             if (b.name == c.Value)
                             {
                                 BuildingGroup.GetComponent<Button>().onClick.AddListener(delegate { BuildManagerGameObject.GetComponent<BuildManager>().Build(b); });
@@ -235,12 +235,11 @@ public class GameManager : MonoBehaviour
                                 {
                                     b.AddComponent<woodcuter>();
                                 }
-
                             }
                         }
                     }
 
-                    ResourceProductionSystem rps = new ResourceProductionSystem();
+                    
                     if (c.Name == "produces")
                     {
                         foreach (var resource in getNextLevelInformation("resourceList", "resources").Elements())
@@ -253,12 +252,25 @@ public class GameManager : MonoBehaviour
                                         rps.duration = int.Parse(elem.Value);
                                     if(elem.Name == "produceAmount")
                                     {
-
+                                        rps.Product.Add( new goods { ProductName = c.Value, Amount = int.Parse(elem.Value) });
+                                    }
+                                    if(elem.Name == "requirement")
+                                    {
+                                        foreach(var requirement in elem.Elements())
+                                        {
+                                            rps.NeedGoods.Add(new goods { ProductName = requirement.Name.ToString(), Amount = int.Parse(requirement.Value) });
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                }
+                if (rps != new ResourceProductionSystem())
+                {
+                    Debug.Log(BuildingGroup.GetComponent<woodcuter>().test);
+                    BuildingGroup.GetComponent<woodcuter>().test = 2;
+                    //BuildingGroup.GetComponent<woodcuter>().Production = rps;
                 }
             }
         }
