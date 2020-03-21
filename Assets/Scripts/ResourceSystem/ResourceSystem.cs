@@ -7,6 +7,12 @@ public class ResourceProductionSystem
     public List<goods> Product;
     public int duration;
     public List<goods> NeedGoods;
+
+    public ResourceProductionSystem()
+    {
+        Product = new List<goods>();
+        NeedGoods = new List<goods>();
+    }
 }
 public class goods
 {

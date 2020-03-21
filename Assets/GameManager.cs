@@ -221,6 +221,7 @@ public class GameManager : MonoBehaviour
             {
                 var BuildingGroup = Instantiate(ButtonBuilding, BuildMenuResources);
                 BuildingGroup.transform.Find("Text").GetComponent<Text>().text = i.Name.ToString();
+                GameObject currentBuilding = null;
                 ResourceProductionSystem rps = new ResourceProductionSystem();
                 foreach (var c in i.Elements())
                 {
@@ -230,6 +231,7 @@ public class GameManager : MonoBehaviour
                         {
                             if (b.name == c.Value)
                             {
+                                currentBuilding = b;
                                 BuildingGroup.GetComponent<Button>().onClick.AddListener(delegate { BuildManagerGameObject.GetComponent<BuildManager>().Build(b); });
                                 if(!b.GetComponent<woodcuter>())
                                 {
@@ -246,7 +248,7 @@ public class GameManager : MonoBehaviour
                         {
                             if(resource.Name == c.Value)
                             {
-                                foreach (var elem in c.Elements())
+                                foreach (var elem in resource.Elements())
                                 {
                                     if (elem.Name == "duration")
                                         rps.duration = int.Parse(elem.Value);
@@ -268,8 +270,8 @@ public class GameManager : MonoBehaviour
                 }
                 if (rps != new ResourceProductionSystem())
                 {
-                    Debug.Log(BuildingGroup.GetComponent<woodcuter>().test);
-                    BuildingGroup.GetComponent<woodcuter>().test = 2;
+                    if(currentBuilding != null)
+                        currentBuilding.GetComponent<woodcuter>().Production = rps;
                     //BuildingGroup.GetComponent<woodcuter>().Production = rps;
                 }
             }

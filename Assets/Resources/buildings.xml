@@ -23,7 +23,7 @@
 			<requirement>
 				<woodPlanks>20</woodPlanks>
 			</requirement>
-			<produces>WoodPlanks</produces>
+			<produces>WoodPlank</produces>
 		</sawMill>
 		<steinbruch>
       <objectname>stoneMiner</objectname>
